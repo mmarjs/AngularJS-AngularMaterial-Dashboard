@@ -1,0 +1,238 @@
+<md-dialog aria-label="Add Farmer Dialog" flex="50" flex-xs="100" class="tri-wizard-dialog" md-whiteframe-z1 margin-bottom-100 tri-wizard>
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+      <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+          <h2>Add Farmer Wizard</h2><h2> {{triWizard.progress}}% <span translate>Complete</span></h2>
+      </div>
+      <md-progress-linear class="md-primary padding-bottom-5" md-mode="determinate" ng-value="triWizard.progress"></md-progress-linear>
+    </md-toolbar>
+
+    <md-divider></md-divider>
+
+    <md-dialog-content class="md-dialog-content">
+      <md-tabs class="farmer-wizard-tabs" layout-fill md-selected="triWizard.currentStep" md-dynamic-height>
+          <md-tab id="account">
+              <md-tab-label>
+                  <span class="lima-wizard-badge">1</span>
+                  <span translate>Account details</span>
+              </md-tab-label>
+              <md-tab-body>
+                  <md-content class="md-padding">
+                      <form name="accountForm" tri-wizard-form novalidate>
+                          <div>
+
+                              <md-input-container class="md-block">
+                                  <label>Email Address</label>
+                                  <input type="email" name="email" ng-model="vm.farmer.email" required>
+                                  <div ng-messages="accountForm.email.$error" md-auto-hide="false" ng-show="accountForm.email.$touched">
+                                      <div ng-message when="required">
+                                          <span translate>This field is required</span>
+                                      </div>
+                                      <div ng-message when="email">
+                                          <span translate>Please enter a valid email</span>
+                                      </div>
+                                  </div>
+                              </md-input-container>
+                              <md-input-container class="md-block">
+                                  <label translate>Username</label>
+                                  <input name="username" ng-model="vm.farmer.username" required>
+                                  <div ng-messages="accountForm.username.$error" md-auto-hide="false" ng-show="accountForm.username.$touched">
+                                      <div ng-message when="required">
+                                          <span translate>This field is required</span>
+                                      </div>
+                                  </div>
+                              </md-input-container>
+
+                              <div layout layout-xs="column" flex>
+                                  <md-input-container flex>
+                                      <label translate>Password</label>
+                                      <input type="password" name="password" ng-model="vm.farmer.password" required>
+                                      <div ng-messages="accountForm.password.$error" md-auto-hide="false" ng-show="accountForm.password.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                                  <div flex="5"></div>
+                                  <md-input-container flex>
+                                      <label translate>Confirm Your Password</label>
+                                      <input type="password" name="passwordConfirm" ng-model="vm.control.passwordConfirm" required>
+                                      <div ng-messages="accountForm.passwordConfirm.$error" md-auto-hide="false" ng-show="accountForm.passwordConfirm.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                              </div>
+                          </div>
+                      </form>
+                  </md-content>
+              </md-tab-body>
+          </md-tab>
+          <md-tab id="address" ng-disabled="accountForm.$invalid">
+              <md-tab-label>
+                  <span class="lima-wizard-badge">2</span>
+                  <span translate>Contact Details</span>
+              </md-tab-label>
+              <md-tab-body>
+                  <md-content class="md-padding">
+                      <form name="addressForm" tri-wizard-form>
+                          <div>
+                              <div layout layout-xs="column" flex>
+                                  <md-input-container flex>
+                                      <label translate>First name</label>
+                                      <input name="firstName" ng-model="vm.farmer.first_name" required>
+                                      <div ng-messages="addressForm.firstName.$error" md-auto-hide="false" ng-show="addressForm.firstName.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                                  <div flex="5"></div>
+                                  <md-input-container flex>
+                                      <label translate>Last name</label>
+                                      <input name="lastName" ng-model="vm.farmer.last_name" required>
+                                      <div ng-messages="addressForm.lastName.$error" md-auto-hide="false" ng-show="addressForm.lastName.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+
+
+                              </div>
+                              <div layout layout-xs="column" flex>
+                                <md-select placeholder="Select Gender" ng-model="vm.farmer.gender" class="width-300">
+                                    <md-option ng-repeat = "gender in vm.genders"value="{{gender.abbreviation}}">{{gender.name}}</md-option>
+
+                                </md-select>
+
+                              </div>
+                              <md-input-container class="md-block">
+                                  <label translate>Address</label>
+                                  <input name="address" ng-model="vm.farmer.address" required>
+                                  <div ng-messages="addressForm.address.$error" md-auto-hide="false" ng-show="addressForm.address1.$touched">
+                                      <div ng-message when="required">
+                                          <span translate>This field is required</span>
+                                      </div>
+                                  </div>
+                              </md-input-container>
+
+                              <div layout layout-xs="column" flex>
+                                  <md-input-container flex>
+                                      <label translate>Phone Number</label>
+                                      <input name="phoneNumber" ng-model="vm.farmer.phone_number" required>
+                                      <div ng-messages="addressForm.phoneNumber.$error" md-auto-hide="false" ng-show="addressForm.phoneNumber.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                                  <div flex="5"></div>
+                                  <md-input-container flex>
+                                      <label translate>Confirm Phone Number</label>
+                                      <input name="lastName" ng-model="vm.control.phone_number" required>
+                                      <div ng-messages="addressForm.confirmPhoneNumber.$error" md-auto-hide="false" ng-show="addressForm.confirmPhoneNumber.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                              </div>
+
+                              <div layout layout-xs="column" flex>
+                                <md-select placeholder="Select District" ng-model="vm.farmer.district_ref">
+                                    <md-option ng-repeat = "district in vm.districts"value="{{district.id}}">{{district.name}}</md-option>
+
+                                </md-select>
+
+                              </div>
+
+
+
+                          </div>
+                      </form>
+                  </md-content>
+              </md-tab-body>
+          </md-tab>
+          <md-tab id="crops" ng-disabled="addressForm.$invalid"> <!--ng-disabled="addressForm.$invalid"-->
+              <md-tab-label>
+                  <span class="lima-wizard-badge">3</span>
+                  <span translate>Crops</span>
+              </md-tab-label>
+              <md-tab-body>
+                  <md-content class="md-padding">
+                    <div layout="row" layout-align="space-around center" ng-controller="CropSelectorCtrl as ctrl">
+                      <form name="cropsForm" tri-wizard-form>
+                        <input name="crops" ng-model="ctrl.sentinel" required hidden>
+                        <md-chips ng-model="::vm.farmer.crop_refs" md-autocomplete-snap
+                                  md-transform-chip="ctrl.transformChip($chip)"
+                                  md-require-match="ctrl.autocompleteDemoRequireMatch">
+                          <md-autocomplete
+                              md-selected-item="ctrl.selectedItem"
+                              md-search-text="ctrl.searchText"
+                              md-items="item in ctrl.querySearch(ctrl.searchText)"
+                              md-item-text="item.name"
+                              placeholder="Search for a crop">
+                            <span md-highlight-text="ctrl.searchText">{{item.name}}</span>
+                          </md-autocomplete>
+                          <md-chip-template>
+                            <span>
+                              <strong>{{$chip.name}}</strong>
+
+                            </span>
+                          </md-chip-template>
+                        </md-chips>
+                      </form>
+                    </div>
+                  </md-content>
+              </md-tab-body>
+          </md-tab>
+
+
+          <md-tab id="agents" ng-disabled="vm.farmer.crop_refs.length == 0"> <!--ng-disabled="addressForm.$invalid"-->
+              <md-tab-label>
+                  <span class="lima-wizard-badge">4</span>
+                  <span translate>Agents</span>
+              </md-tab-label>
+              <md-tab-body>
+                  <md-content class="md-padding">
+                    <div layout="row" layout-align="space-around center" ng-controller="AgentSelectorCtrl as ctrl">
+                      <form name="agentsForm" tri-wizard-form>
+                        <input name="agents" ng-model="ctrl.second_sentinel" required hidden>
+                      <md-chips ng-model="::vm.farmer.agent_refs" md-autocomplete-snap
+                                md-transform-chip="ctrl.transformChip($chip)"
+                                md-require-match="ctrl.autocompleteDemoRequireMatch">
+                        <md-autocomplete
+                            md-selected-item="ctrl.selectedItem"
+                            md-search-text="ctrl.searchText"
+                            md-items="item in ctrl.querySearch(ctrl.searchText)"
+                            md-item-text="item.first_name + ' ' + item.last_name"
+                            placeholder="Search for an Agent">
+                          <span md-highlight-text="ctrl.searchText">{{item.first_name + ' ' + item.last_name}}</span>
+                        </md-autocomplete>
+                        <md-chip-template>
+                          <span>
+                            <strong>{{$chip.first_name + ' ' + $chip.last_name}}</strong>
+
+                          </span>
+                        </md-chip-template>
+                      </md-chips>
+                    </form>
+                    </div>
+                  </md-content>
+              </md-tab-body>
+          </md-tab>
+
+      </md-tabs>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+
+        <!--span flex></span>
+        <md-button ng-click="vm.cancel()">Cancel</md-button>
+        <md-button ng-click="vm.hide()" class="md-primary" ng-disabled="farmerForm.$invalid">Save</md-button-->
+        <md-button class="md-primary md-raised" ng-click="triWizard.prevStep()" ng-hide="triWizard.currentStep == 0 " ng-disabled="triWizard.prevStepDisabled()" translate="Previous"></md-button>
+        <md-button class="md-primary md-raised" ng-click="triWizard.nextStep()" ng-hide="triWizard.progress == 100 && triWizard.currentStep > 1" ng-disabled="triWizard.nextStepDisabled()" translate="Next"></md-button>
+        <md-button class="md-accent md-raised" ng-click="triWizard.currentStep = 4; vm.hide()" ng-show="triWizard.progress == 100 && triWizard.currentStep < 4" translate="Save"></md-button>
+    </md-dialog-actions>
+</md-dialog>

@@ -1,0 +1,20 @@
+<md-dialog aria-label="Mango (Fruit)" flex="30" flex-xs="100">
+    <md-toolbar md-theme="deep-orange">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span translate>Delete Confirmation</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <md-divider></md-divider>
+
+    <md-dialog-content class="md-dialog-content">
+        Delete {{vm.selected.length > 1 ? vm.selected.length : ""}} {{vm.selected.length > 1 ? 'Wards' : vm.selected[0].name}}?
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.cancel()">Cancel</md-button>
+        <md-button ng-click="vm.hide()" class="md-primary" ng-disabled="taskForm.$invalid">Yes</md-button>
+    </md-dialog-actions>
+</md-dialog>

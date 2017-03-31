@@ -1,0 +1,37 @@
+[{
+    "username": "muchu",
+    "displayName": "Muchu",
+    "avatar": "assets/images/avatars/avatar-5.png",
+    "roles": [
+        "SUPERADMIN"
+    ]
+},{
+    "username": "edwin",
+    "displayName": "Edwin",
+    "avatar": "assets/images/avatars/avatar-8.png",
+    "roles": [
+        "ADMIN"
+    ]
+},{
+    "username": "mwila",
+    "displayName": "Mwila",
+    "avatar": "assets/images/avatars/avatar-3.png",
+    "roles": [
+        "LIMALINKS ORDINARY USER"
+    ]
+},{
+    "username": "marcus",
+    "displayName": "Marcus",
+    "avatar": "assets/images/avatars/avatar-4.png",
+    "roles": [
+        "MARKET AGENT"
+    ]
+},
+{
+    "username": "cynthia",
+    "displayName": "Cynthia",
+    "avatar": "assets/images/avatars/avatar-2.png",
+    "roles": [
+        "ANONYMOUS"
+    ]
+}]

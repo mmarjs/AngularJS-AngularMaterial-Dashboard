@@ -1,0 +1,63 @@
+$sidenav-mobile-width: 260px;
+$sidenav-desktop-width: 300px;
+
+// import angular material scss
+@import "angular-material/angular-material.scss";
+
+body {
+  color: #212121;
+}
+
+// set template font family
+button, select, html, textarea, input {
+  font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
+}
+
+// import app scss
+@import "scss/material-backgrounds";
+
+
+
+
+
+/**
+ *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+
+// injector
+// endinjector
+
+// Add custom CSS here
+
+.sidebar-left-logo {
+  flex-shrink: 0;
+  img {
+    max-width: 106.36px;
+    max-height: 54.55px;
+    vertical-align: top;
+    margin-right: 4px;
+    transform: translateX(-4px);
+  }
+}
+
+.side-menu-icon[md-font-icon], .menu-toggle-icon[md-font-icon] {
+  height: 100%;
+  line-height: inherit;
+  font-size: 1.7rem;
+}
+.side-menu-icon[md-font-icon] {
+  width: 24px;
+}
+.menu-toggle-icon {
+  text-align: center;
+  float: right;
+  transition: all .5s;
+  &.open {
+    transform: rotate(90deg);
+  }
+}
+
+tri-menu-item md-icon, .md-primary {
+  color: #000000 !important;
+}

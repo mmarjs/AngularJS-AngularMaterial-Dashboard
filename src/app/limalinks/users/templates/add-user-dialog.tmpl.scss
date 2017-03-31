@@ -1,0 +1,48 @@
+.tri-wizard-dialog md-dialog-content {
+  padding: 0px; margin-top: -1px
+}
+
+.tri-wizard-dialog md-content  {
+  padding-left: 50px;
+  padding-right: 50px;
+  //padding-top: 40px; 
+  margin-top: -1px
+}
+
+
+.farmer-wizard-tabs {
+
+}
+
+md-divider {
+  color:#000000;
+}
+
+md-dialog-actions {
+  border-top: solid 1px #ebf1d4;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+.lima-wizard-badge {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  display: inline-block;
+  margin-right: 8px;
+  border: 1px solid #7d7e80;
+}
+&.md-focus .lima-wizard-badge {
+  border: 2px solid black;
+}
+
+.oxy-step-label {
+  border:1px black solid; border-radius:50%
+}
+
+md-tab-body > md-content {
+  padding-left: 50px;
+  padding-right: 50px;
+}

@@ -1,0 +1,129 @@
+<md-dialog aria-label="Mango (Fruit)" flex="40" flex-xs="100">
+  <div ng-if="!vm.editMode" class="crop"><img src="assets/images/backgrounds/material-backgrounds/mb-bg-04.jpg" alt="Card Image">
+
+  </div>
+  <div layout="row"  ng-if="!vm.editMode">
+    <div flex="85">
+
+    </div>
+    <md-button ng-click="vm.editMode = true;" class="md-fab md-accent" style="margin-top:-37px" >
+        <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+        <md-tooltip>Edit {{vm.model.objectType}}</md-tooltip>
+    </md-button>
+  </div>
+
+    <md-toolbar md-theme="{{triSkin.elements.content}}" ng-if="vm.editMode">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span> {{vm.selected.length == 1? "Edit":"Add"}} {{vm.model.objectType}}</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <md-divider ng-if="editMode"></md-divider>
+
+    <md-dialog-content class="md-dialog-content">
+        <form name="taskForm" novalidate layout="column" ng-if="vm.editMode">
+            <md-input-container ng-repeat = "field in vm.inputs">
+                <label translate>{{field.label}}</label>
+                <input
+                    dynamic-model="'vm.object.'+field.name"
+                    class="dialog-close"
+                    name="task" ng-required={{field.required}}
+                    ng-maxlength="{{field.maxtrlength}}"/>
+                <div ng-messages="taskForm.task.$error">
+                    <div ng-message when="required">
+                        <span translate>Please enter a {{vm.model.objectType | lowercase}} name</span>
+                    </div>
+                    <div ng-message when="maxlength">
+                        <span translate>The {{vm.model.objectType | lowercase}} name should not be longer than 50 characters</span>
+                    </div>
+                </div>
+            </md-input-container>
+            <div ng-repeat = "select in vm.selects">
+              <md-select placeholder="Select {{select.label}}"  dynamic-model="'vm.object.'+select.name">
+                  <md-option ng-repeat = "ref in select.refs"value="{{ref.id}}">{{ref.name || ref.first_name + ' ' + ref.last_name}}</md-option>
+
+              </md-select>
+            </div>
+
+            <div ng-repeat = "select in vm.predefinedSelects">
+              <md-select placeholder="Select {{select.label}}" dynamic-model="'vm.object.'+select.name">
+                  <md-option ng-repeat = "ref in select.refs"value="{{ref[0]}}">{{ref[1]}}</md-option>
+
+              </md-select>
+            </div>
+
+
+            <div ng-repeat = "type in vm.childSetHeadings" ng-controller = "ReferenceSelectorController as ctrl">
+              {{type[0] | uppercase}}{{type.substring(1, type.length)}}
+              <md-chips dynamic-model="'vm.object.'+type.substring(0, type.length-1)+'_set'"
+                        md-transform-chip="ctrl.transformChip($chip)"
+                        md-require-match="ctrl.autocompleteDemoRequireMatch"
+                        name = "{{type}}">
+                  <md-autocomplete
+                      md-selected-item="ctrl.selectedItem"
+                      md-search-text="ctrl.searchText"
+                      md-items="item in ctrl.querySearch(ctrl.searchText, type)"
+                      md-item-text="item.name"
+                      placeholder="+ {{type}}">
+                    <span md-highlight-text="ctrl.searchText">{{item.name}}</span>
+                  </md-autocomplete>
+                  <md-chip-template>
+                    <span>
+                      <strong>{{$chip.name}}</strong>
+
+                    </span>
+                  </md-chip-template>
+              </md-chips>
+            </div>
+            <div ng-repeat = "dateCtrl in vm.dateControls">
+              <md-datepicker dynamic-model="'vm.object.'+dateCtrl.name" md-placeholder="{{dateCtrl.label}}"></md-datepicker>
+            </div>
+
+
+
+
+        </form>
+
+        <div ng-if = "!vm.editMode" style="margin-top:-30px" layout>
+          <div flex>
+            <h2>{{vm.selected[0].name}}</h2>
+            <div ng-repeat = "field in vm.fields | orderBy: 'detail_index'">
+              <span style="font-size:0.8em; color:gray">{{field.label}}</span><br />
+              <span>
+                {{
+                    (field.type == 'DateTimeField')?
+                        (vm.selected[0][field.name] | date: 'MMM dd, yyyy')
+                        :((field.type == 'LLForeignKey')?(vm.selected[0][field.name+"_string"]): (vm.selected[0][field.name]))
+                }}
+              </span>
+            </div>
+
+          </div>
+
+          <div flex style="margin-top:55px">
+
+            <div ng-repeat="set in vm.childSets">
+                <h3 ng-if="set.length>0">{{vm.childSetHeadings[$index][0] | uppercase}}{{vm.childSetHeadings[$index].substring(1,vm.childSetHeadings[$index].length)}}</h3>
+                  <div ng-repeat="child in set">{{child.name}}</div>
+
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <div layout="row" layout-align="center center">
+          <md-progress-circular class="md-primary" md-mode="indeterminate" ng-if="!vm.controlsResource.then()" style="margin-top:-70px"></md-progress-circular>
+        </div>
+
+    </md-dialog-content>
+    <md-dialog-actions layout="row" >
+        <span flex></span>
+        <md-button ng-click="vm.cancel()">Cancel</md-button>
+        <md-button ng-click="vm.hide()" class="md-primary" ng-disabled="taskForm.$invalid" ng-if = "vm.editMode">Save</md-button>
+    </md-dialog-actions>
+</md-dialog>

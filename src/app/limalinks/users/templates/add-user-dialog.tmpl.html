@@ -1,0 +1,320 @@
+<md-dialog aria-label="Add User Dialog" flex="50" flex-xs="100" class="tri-wizard-dialog" md-whiteframe-z1 margin-bottom-100 tri-wizard>
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+      <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+          <h2>{{vm.selected.length == 1? "Edit":"Add"}} {{vm.model.name}} Wizard</h2><h2> {{triWizard.progress}}% <span translate>Complete</span></h2>
+          <md-button class="md-icon-button" ng-click="vm.cancel()">
+              <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+          </md-button>
+      </div>
+
+      <md-progress-linear class="md-primary padding-bottom-5" md-mode="determinate" ng-value="triWizard.progress"></md-progress-linear>
+    </md-toolbar>
+
+    <md-divider></md-divider>
+
+    <md-dialog-content class="md-dialog-content">
+      <md-tabs class="user-wizard-tabs" layout-fill md-selected="triWizard.currentStep" md-dynamic-height>
+          <md-tab id="account">
+              <md-tab-label>
+                  <span class="lima-wizard-badge">1</span>
+                  <span translate>Account details</span>
+              </md-tab-label>
+              <md-tab-body>
+                  <md-content class="md-padding">
+                      <form name="accountForm" tri-wizard-form novalidate autocomplete="off">
+                          <div>
+
+
+                              <md-input-container class="md-block" flex>
+                                  <label translate>Username</label>
+                                  <input name="username" ng-model="vm.user.username" ng-required="{{vm.model.username.required}}">
+                                  <div ng-messages="accountForm.username.$error" md-auto-hide="false" ng-show="accountForm.username.$touched">
+                                      <div ng-message when="required">
+                                          <span translate>This field is required</span>
+                                      </div>
+                                  </div>
+                              </md-input-container>
+
+
+
+                              <div layout layout-xs="column" flex>
+                                    <md-input-container class="md-block" flex>
+                                        <label>Email Address</label>
+                                        <input type="email" name="email" ng-model="vm.user.email" ng-required="{{vm.model.email.required}}">
+                                        <div ng-messages="accountForm.email.$error" md-auto-hide="false" ng-show="accountForm.email.$touched">
+                                            <div ng-message when="required">
+                                                <span translate>This field is required</span>
+                                            </div>
+                                            <div ng-message when="email">
+                                                <span translate>Please enter a valid email</span>
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                    <div flex="5"></div>
+                                    <md-input-container class="md-block" flex>
+                                        <label>Confirm Email Address</label>
+                                        <input type="email" name="emailConfirm" ng-model="vm.control.email" compare-to="vm.user.email" ng-required="{{vm.model.email.required}}">
+                                        <div ng-messages="accountForm.emailConfirm.$error" md-auto-hide="false" ng-show="accountForm.email.$touched">
+                                            <div ng-message when="required">
+                                                <span translate>This field is required</span>
+                                            </div>
+                                            <div ng-message when="email">
+                                                <span translate>Please enter a valid email</span>
+                                            </div>
+                                            <div ng-message when="compareTo">
+                                                <span translate>Please ensure that the email addresses match</span>
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+
+                              </div>
+
+                              <div layout layout-xs="column" flex>
+                                  <md-input-container flex>
+                                      <label translate>Password</label>
+                                      <input type="password" name="password" ng-model="vm.user.password" ng-required="{{vm.model.password.required}}">
+                                      <div ng-messages="accountForm.password.$error" md-auto-hide="false" ng-show="accountForm.password.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                                  <div flex="5"></div>
+                                  <md-input-container flex>
+                                      <label translate>Confirm Password</label>
+                                      <input type="password" name="passwordConfirm" ng-model="vm.control.passwordConfirm" ng-required="{{vm.model.password.required}}" compare-to="vm.user.password">
+                                      <div ng-messages="accountForm.passwordConfirm.$error" md-auto-hide="false" ng-show="accountForm.passwordConfirm.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                          <div ng-message when="compareTo">
+                                              <span translate>Please ensure that the passwords match</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                              </div>
+                          </div>
+                      </form>
+                  </md-content>
+              </md-tab-body>
+          </md-tab>
+          <md-tab id="address">
+              <md-tab-label>
+                  <span class="lima-wizard-badge">2</span>
+                  <span translate>Contact Details</span>
+              </md-tab-label>
+              <md-tab-body>
+                  <md-content class="md-padding">
+                      <form name="addressForm" tri-wizard-form autocomplete="off">
+                          <div>
+                              <div layout layout-xs="column" flex>
+                                  <md-input-container flex>
+                                      <label translate>First name</label>
+                                      <input name="firstName" ng-model="vm.user.first_name" ng-required="{{vm.model.first_name.required}}">
+                                      <div ng-messages="addressForm.firstName.$error" md-auto-hide="false" ng-show="addressForm.firstName.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                                  <div flex="5"></div>
+                                  <md-input-container flex>
+                                      <label translate>Last name</label>
+                                      <input name="lastName" ng-model="vm.user.last_name" ng-required="{{vm.model.last_name.required}}">
+                                      <div ng-messages="addressForm.lastName.$error" md-auto-hide="false" ng-show="addressForm.lastName.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+
+
+                              </div>
+                              <div layout layout-xs="column" flex>
+                                <md-select placeholder="Select Gender" ng-model="vm.user.gender" class="width-300" ng-required="{{vm.model.gender.required}}">
+                                    <md-option ng-repeat = "gender in vm.genders"value="{{gender.abbreviation}}">{{gender.name}}</md-option>
+
+                                </md-select>
+
+                              </div>
+                              <md-input-container class="md-block">
+                                  <label translate>Address</label>
+                                  <input name="address" ng-model="vm.user.address" ng-required="{{vm.model.address.required}}">
+                                  <div ng-messages="addressForm.address.$error" md-auto-hide="false" ng-show="addressForm.address.$touched">
+                                      <div ng-message when="required">
+                                          <span translate>This field is required</span>
+                                      </div>
+                                  </div>
+                              </md-input-container>
+
+                              <div layout layout-xs="column" flex>
+                                  <md-input-container flex>
+                                      <label translate>Phone Number</label>
+                                      <input name="phoneNumber"
+                                             ng-model="vm.user.phone_number"
+                                             ng-required="{{vm.model.phone_number.required}}"
+                                             ng-pattern="/[0-9]{10}/"
+
+                                             type="email">
+                                      <div ng-messages="addressForm.phoneNumber.$error" md-auto-hide="false" ng-show="addressForm.phoneNumber.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                          <div ng-message when="pattern">
+                                              <span translate>Please enter a valid 10-digit phone number</span>
+                                          </div>
+
+                                          <div ng-message when="compareTo">
+                                              <span translate>Please ensure that the phone numbers match</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                                  <div flex="5"></div>
+                                  <md-input-container flex>
+                                      <label translate>Confirm Phone Number</label>
+                                      <input name="confirmPhoneNumber"
+                                             ng-model="vm.control.phone_number"
+                                             ng-required="{{vm.model.phone_number.required}}"
+                                             ng-pattern="/[0-9]{10}/"
+
+                                             compare-to="vm.user.phone_number"
+                                             type="email">
+                                      <div ng-messages="addressForm.confirmPhoneNumber.$error" md-auto-hide="false" ng-show="addressForm.confirmPhoneNumber.$touched">
+                                          <div ng-message when="required">
+                                              <span translate>This field is required</span>
+                                          </div>
+                                          <div ng-message when="pattern">
+                                              <span translate>Please enter a valid 10-digit phone number</span>
+                                          </div>
+
+                                          <div ng-message when="compareTo">
+                                              <span translate>Please ensure that the phone numbers match</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                              </div>
+
+                              <div layout layout-xs="column" flex>
+                                <md-select placeholder="Select Province" ng-model="vm.user.province_ref" ng-required="{{vm.model.province_ref.required}}" ng-if = "vm.model.hasOwnProperty('location_ref')">
+                                    <md-option ng-repeat = "province in vm.provinces"value="{{province.id}}">{{province.name}}</md-option>
+
+                                </md-select>
+
+                                <div flex="5"></div>
+                                <md-select placeholder="Select District" ng-model="vm.user.district_ref" ng-required="{{vm.model.district_ref.required}}" ng-if = "vm.model.hasOwnProperty('location_ref')">
+                                    <md-option ng-repeat = "district in vm.districts"value="{{district.id}}">{{district.name}}</md-option>
+
+                                </md-select>
+
+                                <div flex="5"></div>
+                                <md-select placeholder="Select Ward" ng-model="vm.user.ward_ref" ng-required="{{vm.model.ward_ref.required}}" ng-if = "vm.model.hasOwnProperty('location_ref')">
+                                    <md-option ng-repeat = "ward in vm.wards"value="{{ward.id}}">{{ward.name}}</md-option>
+
+                                </md-select>
+
+                                <div flex="5"></div>
+                                <md-select placeholder="Select Town" ng-model="vm.user.town_ref" ng-required="{{vm.model.town_ref.required}}" ng-if = "vm.model.hasOwnProperty('location_ref')">
+                                    <md-option ng-repeat = "town in vm.towns"value="{{town.id}}">{{town.name}}</md-option>
+
+                                </md-select>
+
+                                <div flex="5"></div>
+                                <md-select placeholder="Select Market" ng-model="vm.user.market_ref" ng-required="{{vm.model.market_ref.required}}" ng-if = "vm.model.hasOwnProperty('location_ref')">
+                                    <md-option ng-repeat = "market in vm.markets"value="{{market.id}}">{{market.name}}</md-option>
+
+                                </md-select>
+
+
+
+
+                              </div>
+
+
+
+                          </div>
+                      </form>
+                  </md-content>
+              </md-tab-body>
+          </md-tab>
+          <md-tab id="crops" ng-if="vm.model.name == 'Farmer'"> <!--ng-disabled="addressForm.$invalid"-->
+              <md-tab-label>
+                  <span class="lima-wizard-badge">3</span>
+                  <span translate>Crops</span>
+              </md-tab-label>
+              <md-tab-body>
+                  <md-content class="md-padding">
+                    <div layout="row" layout-align="space-around center" ng-controller="CropSelectorCtrl as ctrl">
+                      <form name="cropsForm" tri-wizard-form>
+
+                        <md-chips ng-model="::vm.user.crop_refs" md-autocomplete-snap
+                                  md-transform-chip="ctrl.transformChip($chip)"
+                                  md-require-match="ctrl.autocompleteDemoRequireMatch"
+                                  ng-required="{{vm.model.crop_refs}}">
+                          <md-autocomplete
+                              md-selected-item="ctrl.selectedItem"
+                              md-search-text="ctrl.searchText"
+                              md-items="item in ctrl.querySearch(ctrl.searchText)"
+                              md-item-text="item.name"
+                              placeholder="Search for a crop">
+                            <span md-highlight-text="ctrl.searchText">{{item.name}}</span>
+                          </md-autocomplete>
+                          <md-chip-template>
+                            <span>
+                              <strong>{{$chip.name}}</strong>
+
+                            </span>
+                          </md-chip-template>
+                        </md-chips>
+                      </form>
+                    </div>
+                  </md-content>
+              </md-tab-body>
+          </md-tab>
+
+
+          <md-tab id="agents" ng-if="vm.model.name == 'Farmer'"> <!--ng-disabled="addressForm.$invalid"-->
+              <md-tab-label>
+                  <span class="lima-wizard-badge">4</span>
+                  <span translate>Agents</span>
+              </md-tab-label>
+              <md-tab-body>
+                  <md-content class="md-padding">
+                    <div layout="row" layout-align="space-around center" ng-controller="AgentSelectorCtrl as ctrl">
+                      <form name="agentsForm" tri-wizard-form>
+
+                      <md-chips ng-model="::vm.user.agent_refs" md-autocomplete-snap
+                                md-transform-chip="ctrl.transformChip($chip)"
+                                md-require-match="ctrl.autocompleteDemoRequireMatch"
+                                ng-required="{{vm.model.agent_refs}}">
+                        <md-autocomplete
+                            md-selected-item="ctrl.selectedItem"
+                            md-search-text="ctrl.searchText"
+                            md-items="item in ctrl.querySearch(ctrl.searchText)"
+                            md-item-text="item.first_name + ' ' + item.last_name"
+                            placeholder="Search for an Agent">
+                          <span md-highlight-text="ctrl.searchText">{{item.first_name + ' ' + item.last_name}}</span>
+                        </md-autocomplete>
+                        <md-chip-template>
+                          <span>
+                            <strong>{{$chip.first_name + ' ' + $chip.last_name}}</strong>
+
+                          </span>
+                        </md-chip-template>
+                      </md-chips>
+                    </form>
+                    </div>
+                  </md-content>
+              </md-tab-body>
+          </md-tab>
+
+
+
+      </md-tabs>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button class="md-primary md-raised" ng-click="triWizard.prevStep()" ng-hide="triWizard.currentStep == 0 " ng-disabled="triWizard.prevStepDisabled()" translate="Previous"></md-button>
+        <md-button class="md-primary md-raised" ng-click="triWizard.nextStep()" ng-hide="triWizard.currentStep ==3" ng-disabled="triWizard.nextStepDisabled()" translate="Next"></md-button>
+        <md-button class="md-accent md-raised" ng-click="triWizard.currentStep = 4; vm.hide()" ng-show="triWizard.progress == 100 && triWizard.currentStep < 4" translate="Save"></md-button>
+    </md-dialog-actions>
+</md-dialog>

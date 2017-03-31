@@ -1,0 +1,9 @@
+<tri-widget title="Market Agent Performance" md-theme="{{::triSkin.elements.logo}}" class="padding-left-40 padding-right-40 padding-top-20 padding-bottom-20 no-shadow">
+    <div style="margin-left:15px; color:gray">
+        {{vm.dateRange.start | amDateFormat:'MMMM Do YYYY'}} - {{vm.dateRange.end | amDateFormat:'MMMM Do YYYY'}}
+    </div>
+    <nvd3 options="vm.multiLineChartOptions" data="vm.multiLineChartData" class="with-3d-shadow with-transitions"></nvd3>
+</tri-widget>
+<md-button ng-click="vm.changeDate($event)" class="md-fab md-accent md-fab-bottom-right" aria-label="change date">
+    <md-icon md-font-icon="zmdi zmdi-calendar-alt"></md-icon>
+</md-button>

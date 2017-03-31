@@ -1,0 +1,31 @@
+<md-dialog aria-label="Mango (Fruit)" flex="30" flex-xs="100">
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span translate>Add Ward</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <md-divider></md-divider>
+
+    <md-dialog-content class="md-dialog-content">
+        <form name="taskForm" novalidate layout="column">
+            <md-input-container>
+                <label translate>Ward Name</label>
+                <input ng-model="vm.ward.name" class="dialog-close" name="task" required/>
+                <div ng-messages="taskForm.task.$error">
+                    <div ng-message when="required">
+                        <span translate>Please enter a ward name</span>
+                    </div>
+                </div>
+            </md-input-container>
+
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.cancel()">Cancel</md-button>
+        <md-button ng-click="vm.hide()" class="md-primary" ng-disabled="taskForm.$invalid">Save</md-button>
+    </md-dialog-actions>
+</md-dialog>

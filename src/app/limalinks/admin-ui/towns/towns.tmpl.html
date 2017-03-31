@@ -1,0 +1,93 @@
+
+
+
+<div class="full-image-background mb-bg-04 padding-20 padding-top-120 overlay-gradient-30" layout="row" layout-align="center start">
+
+
+</div>
+
+<div layout="row" layout-xs="column" layout-margin layout-align="space-between stretch" style="margin-top:-72px; z-index:5">
+    <div class="md-whiteframe-1dp" flex layout="column">
+
+
+        <md-toolbar ng-hide="vm.selected.length || vm.filter.show">
+          <div class="md-toolbar-tools">
+              <h2 class="md-title">Towns</h2>
+              <div flex></div>
+              <md-button class="md-icon-button" ng-click="vm.filter.show = true">
+                  <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+              </md-button>
+          </div>
+        </md-toolbar>
+        <md-toolbar class="md-table-toolbar alternate" ng-show="vm.selected.length">
+          <div class="md-toolbar-tools" layout-align="start center">
+              <div>{{vm.selected.length > 1 ? vm.selected.length : ""}} {{vm.selected.length > 1 ? 'Towns' : vm.selected[0].name}} Selected</div>
+              <div flex></div>
+              <md-button ng-if="vm.selected.length == 1" ng-click="vm.editTown($event)" class="md-icon-button">
+                  <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+              </md-button>
+
+              <md-button class="md-icon-button toolbar-button animated" ng-click="vm.deleteTown($event)">
+                  <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+              </md-button>
+          </div>
+
+        </md-toolbar>
+        <md-toolbar ng-show="vm.filter.show && !vm.selected.length" class="md-table-toolbar md-default">
+          <div class="md-toolbar-tools">
+              <md-icon md-font-icon="zmdi zmdi-search" class="text-light"></md-icon>
+              <form flex="" name="vm.filter.form">
+                  <input type="text" ng-model="vm.query.search" ng-model-options="vm.filter.options" placeholder="search">
+              </form>
+              <md-button class="md-icon-button" ng-click="vm.removeFilter()">
+                  <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+              </md-button>
+          </div>
+        </md-toolbar>
+
+        <md-content style="padding:20px; height:98%">
+
+            <div >
+
+
+
+
+                      <md-table-container>
+                        <table md-table class="md-primary md-data-table" md-row-select multiple ng-model="vm.selected" md-progress="vm.resource.then()">
+                            <thead md-head md-order="vm.query.order" md-on-reorder="vm.getTowns">
+                                <tr md-row>
+                                    <th md-column md-numberic md-order-by="id"><span translate>{{vm.columns.id}}</span></th>
+                                    <th md-column md-order-by="name"><span translate>{{vm.columns.name}}</span></th>
+                                    <th md-column  md-order-by="datecreated"><span translate>{{vm.columns.datecreated}}</span></th>
+                                    <th md-column  md-order-by="lastupdated"><span translate>{{vm.columns.lastupdated}}</span></th>
+                                </tr>
+                            </thead>
+                            <tbody md-body>
+                                <tr md-row md-select="town" md-select-id="id" md-auto-select ng-repeat="town in vm.towns">
+
+
+                                    <td md-cell>{{::town.id}}</td>
+                                    <td md-cell>{{::town.name}}</td>
+                                    <td md-cell>{{::town.date_created | date: 'MMM dd, yyyy'}}</td>
+                                    <td md-cell>{{::town.date_updated | date: 'MMM dd, yyyy'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      </md-table-container>
+
+                      <md-table-pagination md-limit="vm.query.limit" md-page-select md-page="vm.query.page" md-total="{{vm.total_count}}" md-on-paginate="vm.getTowns"></md-table-pagination>
+              </div>
+
+
+
+
+        </md-content>
+
+    </div>
+
+</div>
+
+<md-button ng-click="vm.addTown($event)" class="md-fab md-accent md-fab-bottom-right" id="addFab">
+    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+    <md-tooltip>Add Town</md-tooltip>
+</md-button>
